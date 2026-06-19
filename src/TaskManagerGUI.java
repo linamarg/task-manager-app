@@ -101,9 +101,11 @@ public class TaskManagerGUI extends JFrame {
         JButton doneButton = createStyledButton("Mark Done");
         JButton deleteButton = createStyledButton("Delete Task");
         JButton sortButton = createStyledButton("Sort By Priority");
+        JButton editButton = createStyledButton("Edit Task");
 
         buttonPanel.add(doneButton);
         buttonPanel.add(deleteButton);
+        buttonPanel.add(editButton);
         buttonPanel.add(sortButton);
 
         // LEFT SIDE
@@ -193,8 +195,66 @@ public class TaskManagerGUI extends JFrame {
             );
         });
 
+        editButton.addActionListener(e -> {
+
+            Task selectedTask = taskList.getSelectedValue();
+
+            if (selectedTask == null) {
+                JOptionPane.showMessageDialog(
+                        null,
+                        "Please select a task first."
+                );
+                return;
+            }
+
+            JTextField titleField =
+                    new JTextField(selectedTask.getTitle());
+
+            JTextField descriptionField =
+                    new JTextField(selectedTask.getDescription());
+
+            JTextField deadlineField =
+                    new JTextField(selectedTask.getDeadline());
+
+            JComboBox<Priority> priorityBox =
+                    new JComboBox<>(Priority.values());
+
+            priorityBox.setSelectedItem(
+                    selectedTask.getPriority()
+            );
+
+            Object[] fields = {
+                    "Title:", titleField,
+                    "Description:", descriptionField,
+                    "Deadline:", deadlineField,
+                    "Priority:", priorityBox
+            };
+
+            int result = JOptionPane.showConfirmDialog(
+                    null,
+                    fields,
+                    "Edit Task",
+                    JOptionPane.OK_CANCEL_OPTION
+            );
+
+            if (result == JOptionPane.OK_OPTION) {
+
+                manager.updateTask(
+                        selectedTask,
+                        titleField.getText(),
+                        descriptionField.getText(),
+                        (Priority) priorityBox.getSelectedItem(),
+                        deadlineField.getText()
+                );
+
+                refreshTaskList();
+            }
+        });
+
         setVisible(true);
     }
+
+
 
     // REFRESH TASK LIST
     private void refreshTaskList() {

@@ -144,6 +144,18 @@ public class TaskManager {
         });
     }
 
+    public void updateTask(Task task,
+                           String title,
+                           String description,
+                           Priority priority,
+                           String deadline) {
+
+        task.setTitle(title);
+        task.editDescription(description);
+        task.setPriority(priority);
+        task.setDeadline(deadline);
+    }
+
     public int getSize() {
         return tasks.size();
     }
