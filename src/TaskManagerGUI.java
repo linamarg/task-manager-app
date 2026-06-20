@@ -1,6 +1,7 @@
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.time.LocalDate;
 
 public class TaskManagerGUI extends JFrame {
 
@@ -85,6 +86,39 @@ public class TaskManagerGUI extends JFrame {
         taskList.setSelectionBackground(accentColor);
         taskList.setFixedCellHeight(40);
 
+        taskList.setCellRenderer(
+                new DefaultListCellRenderer() {
+
+                    @Override
+                    public Component getListCellRendererComponent(
+                            JList<?> list,
+                            Object value,
+                            int index,
+                            boolean isSelected,
+                            boolean cellHasFocus) {
+
+                        JLabel label =
+                                (JLabel) super.getListCellRendererComponent(
+                                        list,
+                                        value,
+                                        index,
+                                        isSelected,
+                                        cellHasFocus
+                                );
+
+                        Task task = (Task) value;
+
+                        if (task.isOverdue()) {
+                            label.setForeground(Color.RED);
+                        }
+                        else {
+                            label.setForeground(Color.WHITE);
+                        }
+
+                        return label;
+                    }
+                });
+
         JScrollPane scrollPane = new JScrollPane(taskList);
         scrollPane.setBorder(BorderFactory.createLineBorder(accentColor, 2));
         scrollPane.getViewport().setBackground(panelColor);
@@ -138,7 +172,7 @@ public class TaskManagerGUI extends JFrame {
                         title,
                         description,
                         priority,
-                        deadline
+                        LocalDate.parse(deadline)
                 );
 
                 listModel.addElement(
@@ -214,7 +248,7 @@ public class TaskManagerGUI extends JFrame {
                     new JTextField(selectedTask.getDescription());
 
             JTextField deadlineField =
-                    new JTextField(selectedTask.getDeadline());
+                    new JTextField(String.valueOf(selectedTask.getDeadline()));
 
             JComboBox<Priority> priorityBox =
                     new JComboBox<>(Priority.values());
@@ -244,7 +278,7 @@ public class TaskManagerGUI extends JFrame {
                         titleField.getText(),
                         descriptionField.getText(),
                         (Priority) priorityBox.getSelectedItem(),
-                        deadlineField.getText()
+                        LocalDate.parse(deadlineField.getText())
                 );
 
                 refreshTaskList();

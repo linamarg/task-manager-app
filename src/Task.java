@@ -1,11 +1,13 @@
+import java.time.LocalDate;
+
 public class Task {
     private String title;
     private boolean isDone;
     private String description;
     private Priority priority;
-    private String deadline;
+    private LocalDate deadline;
 
-    public Task(String title, String description, Priority priority, String deadline) {
+    public Task(String title, String description, Priority priority, LocalDate deadline) {
         this.title = title;
         isDone = false;
         this.description = description;
@@ -36,10 +38,10 @@ public class Task {
         this.priority = priority;
     }
 
-    public String getDeadline() {
+    public LocalDate getDeadline() {
         return deadline;
     }
-    public void setDeadline(String deadline) {
+    public void setDeadline(LocalDate deadline) {
         this.deadline = deadline;
     }
 
@@ -48,6 +50,10 @@ public class Task {
     }
     public String getDescription() {
         return description;
+    }
+
+    public boolean isOverdue() {
+        return deadline.isBefore(LocalDate.now());
     }
 
     @Override

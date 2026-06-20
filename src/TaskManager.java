@@ -3,6 +3,7 @@ import java.io.*;
 import java.util.Scanner;
 import java.util.Collections;
 import java.util.Comparator;
+import java.time.LocalDate;
 
 public class TaskManager {
     private ArrayList<Task> tasks;
@@ -17,13 +18,13 @@ public class TaskManager {
                 title,
                 "",
                 Priority.LOW,
-                ""
+                LocalDate.now()
         );
 
         tasks.add(t);
     }
 
-    public void addTask(String title, String description, Priority priority, String deadline) {
+    public void addTask(String title, String description, Priority priority, LocalDate deadline) {
         Task t = new Task(title, description, priority, deadline);
         tasks.add(t);
     }
@@ -116,7 +117,7 @@ public class TaskManager {
                 String title = splits[0];
                 String description = splits[1];
                 Priority priority = Priority.valueOf(splits[2]);
-                String deadline = splits[3];
+                LocalDate deadline = LocalDate.parse(splits[3]);
                 Boolean isDone = Boolean.parseBoolean(splits[4]);
 
                 Task t = new Task(title, description, priority, deadline);
@@ -148,7 +149,7 @@ public class TaskManager {
                            String title,
                            String description,
                            Priority priority,
-                           String deadline) {
+                           LocalDate deadline) {
 
         task.setTitle(title);
         task.editDescription(description);

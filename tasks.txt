@@ -1,1 +1,2 @@
-hehe;do nothing;MEDIUM;12 may;true
+yoga;;LOW;2027-01-01;false
+should turn red;;LOW;2026-06-21;false
