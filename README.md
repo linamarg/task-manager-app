@@ -5,17 +5,20 @@ A desktop task management application built using Java Swing. The application al
 ## Features
 
 * Add new tasks with:
-
   * Title
   * Description
   * Priority level (High, Medium, Low)
   * Deadline
+* Edit existing tasks
 * Mark tasks as completed
 * Delete tasks
 * Sort tasks by priority
 * Save tasks to a file
 * Load previously saved tasks when the application starts
-* Modern dark-themed graphical user interface
+* Automatic deadline management using Java LocalDate
+* Detect/highlight overdue tasks
+* Modern dark-themed graphical user interface (GUI)
+
 
 ## Technologies Used
 
@@ -48,6 +51,7 @@ A desktop task management application built using Java Swing. The application al
 
 ## Future Improvements
 
+* Search tasks
 * Task filtering
 * Database integration
 * Notifications and reminders
