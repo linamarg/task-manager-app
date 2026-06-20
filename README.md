@@ -48,9 +48,6 @@ A desktop task management application built using Java Swing. The application al
 
 ## Future Improvements
 
-* Search functionality
-* Task editing
-* Due date validation
 * Task filtering
 * Database integration
 * Notifications and reminders
